@@ -1,5 +1,0 @@
-package quiz
-
-func main() {
-
-}
