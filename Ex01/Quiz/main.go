@@ -11,16 +11,10 @@ import (
 )
 
 func main() {
-	p := "../problems.csv"
-	h := flag.Bool("h", false, "help text")
+	csvFilename := flag.String("csv", "../problems.csv", "csv file in a format of 'question,answer'")
 	flag.Parse()
 
-	if *h {
-		fmt.Print("-csv string\n\ta csv file in the format of 'question,answer' (default \"problems.csv\")) " +
-			"\n-limit int\n\tthe time limit for the quiz in seconds (default 30)")
-	}
-
-	f, err := os.Open(p)
+	f, err := os.Open(*csvFilename)
 	if err != nil {
 		log.Fatal(err)
 	}
