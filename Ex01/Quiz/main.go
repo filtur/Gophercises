@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/csv"
 	"flag"
 	"fmt"
@@ -33,21 +32,20 @@ func main() {
 
 	problems := parseLines(lines)
 
-	reader := bufio.NewReader(os.Stdin)
-	c := 0
+	correct := 0
 	for i, p := range problems {
 		fmt.Printf("Problem #%d: %v\n", i+1, p.q)
-		text, _ := reader.ReadString('\n')
-		text = strings.TrimRight(text, "\r\n")
-		if text == p.a {
-			c++
+		var answer string
+		fmt.Scanf("%s\n", &answer)
+		if answer == p.a {
+			correct++
 			fmt.Println("Correct!")
 		} else {
 			fmt.Println("WRONG!")
 		}
 	}
 
-	fmt.Printf("You got %d correct out of %v", c, len(lines))
+	fmt.Printf("You got %d correct out of %d", correct, len(problems))
 }
 
 func parseLines(lines [][]string) []problem {
@@ -55,7 +53,7 @@ func parseLines(lines [][]string) []problem {
 	for i, line := range lines {
 		ret[i] = problem{
 			q: line[0],
-			a: line[1],
+			a: strings.TrimSpace(line[1]),
 		}
 	}
 	return ret
